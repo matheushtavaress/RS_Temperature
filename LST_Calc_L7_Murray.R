@@ -137,18 +137,14 @@ for (k in seq_along(ListLsFiles)) {
   # 2.1. Carregando os valores constantes da imagem do arquivo MTL
   a = which(str_detect(files, "MTL.txt")==TRUE)
   MTL = read.table(files[a], header = FALSE, quote = " ", sep = ";", dec = ".")
-  a = as.character(MTL[[98,1]]) # Posição temporária do Lmax
-  LMax = str_sub(a, start = 33L)  # Função para retirar apenas o valor da linha do arquivo TXT
-  LMax = as.numeric(LMax) # Transformando a variável de character para numeric
-  a = as.character(MTL[[99,1]]) # Posição temporária do Lmin
-  LMin = str_sub(a, start = 33L)  # Função para retirar apenas o valor da linha do arquivo TXT
-  LMin = as.numeric(LMin) # Transformando a variável de character para numeric
-  a = as.character(MTL[[134,1]]) # Posição temporária do QcalMax
-  Qmax = str_sub(a, start = 33L)  # Função para retirar apenas o valor da linha do arquivo TXT
-  Qmax = as.numeric(Qmax) # Transformando a variável de character para numeric
-  a = as.character(MTL[[135,1]]) # Posição temporária do QcalMin
-  Qmin = str_sub(a, start = 33L)  # Função para retirar apenas o valor da linha do arquivo TXT
-  Qmin = as.numeric(Qmin) # Transformando a variável de character para numeric
+  a = as.character(MTL[[98,1]])
+  LMax = as.numeric(str_sub(a, start = str_locate(a, "=")[1]+1))
+  a = as.character(MTL[[99,1]])
+  LMin = as.numeric(str_sub(a, start = str_locate(a, "=")[1]+1))
+  a = as.character(MTL[[134,1]])
+  Qmax = as.numeric(str_sub(a, start = str_locate(a, "=")[1]+1))
+  a = as.character(MTL[[135,1]])
+  Qmin = as.numeric(str_sub(a, start = str_locate(a, "=")[1]+1))
   
   # 2.2. Constantes para cálculo de AF1, AF2 e AF3 (Tabela de Jiménez-Muñoz et al., 2009)
   # Constantes para o cálculo apenas com w -> TIGR3 
